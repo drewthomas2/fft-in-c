@@ -33,12 +33,20 @@ int main(void){
 			0.1765720,-0.0390401,-0.2546523,-0.4702644,-0.6858765,-0.9014886,-1.1171007,-1.3327128,-1.5483249,0.5097997,
 			0.2941876,0.0785755};
 
+    FILE *f = fopen("fft.csv", "w");
+    if (f == NULL){
+        printf("Error opening file!\n");
+        exit(1);
+    }
 
 	FFT(vec, n, d);
 
 	for(int i=0; i<200; i++){
-		printf("%.2f %+.2fi,\n", creal(vec[i]), cimag(vec[i]));
+		printf("%.2f %+.2fi,\n", crealf(vec[i]), cimagf(vec[i]));
+        //fprintf("%.2f %+.2fi,\n", crealf(vec[i]), cimagf(vec[i]));
 	}
+
+    fclose(f);
 
 	while (1){
     }
