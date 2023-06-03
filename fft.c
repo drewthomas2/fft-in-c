@@ -9,6 +9,7 @@
  *  
  *  C FFT based on Cooley Turkey algorithm
  */
+//include memory.h
 
 #include "fft.h"
 
@@ -43,7 +44,7 @@ void ordina(float complex * f1, int N){ //using the reverse order in the array
     for(int i = 0; i < N; i++){
         f2[i] = f1[reverse(N, i)];
     }
-    
+
     for(int j = 0; j < N; j++){
         f1[j] = f2[j];
     }
@@ -52,6 +53,7 @@ void ordina(float complex * f1, int N){ //using the reverse order in the array
 void transform(float complex * f, int N){ 
     ordina(f, N);   //first: reverse order
     float complex *W;
+//    float complex W[250];
     W = (float complex *)malloc(N / 2 * sizeof(float complex));
     W[1] = my_polar(1.0, -1 * 2.0 * PI / N); 
     W[0] = 1;
@@ -82,7 +84,7 @@ void FFT(float complex * f, int N, float d){
     }   
 }
 
-float complex my_polar(float mag, float phase){
+float complex my_polar(float mag, float phase){ // polar to rectangular
     float complex num = mag*cosf(phase) + I*mag*sinf(phase);
     return num;
 }

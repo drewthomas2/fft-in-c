@@ -10,28 +10,27 @@ y = fft(x);
 n = length(x);          % number of samples
 f = (0:n-1)*(fs/n);     % frequency range
 power = abs(y).^2/n;    % power of the DFT
-%ang = angle(y)
-%mag = abs(y)
+ang = angle(y)
 
 writematrix(x,'input_matlab.csv') 
 writematrix(y,'output_matlab.csv') 
 writematrix(power,'power_matlab.csv') 
 my_pwr=importdata("fft_pwr.csv")
-my_fft=importdata('fft.csv')
-%my_angle = angle(my_fft)
-%my_mag = abs(my_fft)
+my
 
-tiledlayout(2,1)
+tiledlayout(2,4)
 
-nexttile
+nexttile([1 2])
 plot(f,power)
 title('MATLAB FFT:')
 xlabel('Frequency')
 ylabel('Power')
 
-nexttile
-plot(f,my_pwr)
+nexttile([1 2])
+plot(f,A)
 title('Drew FFT:')
 xlabel('Frequency')
 ylabel('Power')
 
+nexttile
+plot
