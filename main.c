@@ -18,14 +18,26 @@ int main(void){
 	0.18886,-1.88483,3.32633,-0.98671,-4.25642,-2.57415,4.13318,1.23606,3.00431,-2.00936,0.26363,-2.39380,3.26887,
 	3.48442,1.33336};
 
-    FILE *f = fopen("fft.csv", "w");
-    if (f == NULL){
+    FILE *fft_raw = fopen("fft.csv", "w");
+    if (fft_raw == NULL){
         printf("Error opening file!\n");
         exit(1);
     }
 
-	FILE *fp = fopen("fft_pwr.csv", "w");
-    if (fp == NULL){
+	FILE *power = fopen("fft_pwr.csv", "w");
+    if (power == NULL){
+        printf("Error opening file!\n");
+        exit(1);
+    }
+
+	FILE *phase = fopen("fft_phase.csv", "w");
+    if (phase == NULL){
+        printf("Error opening file!\n");
+        exit(1);
+    }
+
+	FILE *magnitude = fopen("fft_mag.csv", "w");
+    if (phase == NULL){
         printf("Error opening file!\n");
         exit(1);
     }
@@ -34,10 +46,14 @@ int main(void){
 
 	for(int i=0; i<n; i++){
 		//printf("%.2f %+.2fi,\n", crealf(vec[i]), cimagf(vec[i]));
-        fprintf(f, "%.2f %+.2fi,\n", crealf(vec[i]), cimagf(vec[i]));
-		fprintf(fp, "%.2f,\n", sqrt(pow(crealf(vec[i]),2) + pow(cimagf(vec[i]),2))/n);
+        fprintf(fft_raw, "%.2f %+.2fi,", crealf(vec[i]), cimagf(vec[i]));
+		fprintf(power, "%.2f,", pow(cabsf(vec[i]),2)/n);
+		fprintf(phase, "%.2f,", atanf(cimagf(vec[i])/crealf(vec[i])));
+		fprintf(magnitude, "%.2f,", cabsf(vec[i]));
 	}
-    fclose(f);
-	fclose(fp);
+    fclose(fft_raw);
+	fclose(power);
+	fclose(phase);
+	fclose(magnitude);
 	exit(1);
 }

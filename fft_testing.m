@@ -10,28 +10,58 @@ y = fft(x);
 n = length(x);          % number of samples
 f = (0:n-1)*(fs/n);     % frequency range
 power = abs(y).^2/n;    % power of the DFT
-%ang = angle(y)
-%mag = abs(y)
+phase = angle(y)
+mag = abs(y)
 
 writematrix(x,'input_matlab.csv') 
 writematrix(y,'output_matlab.csv') 
 writematrix(power,'power_matlab.csv') 
-my_pwr=importdata("fft_pwr.csv")
-my_fft=importdata('fft.csv')
+my_pwr=importdata("fft_pwr.csv",',')
+my_fft=importdata('fft.csv',',')
+my_phase=importdata('fft_phase.csv',',')
+my_mag=importdata('fft_mag.csv',',')
 %my_angle = angle(my_fft)
 %my_mag = abs(my_fft)
+%my_pwr = abs(my_fft).^2/n
 
-tiledlayout(2,1)
+phase_diff=my_phase-phase
+mag_diff=my_mag - mag
 
-nexttile
+tiledlayout(2,4)
+
+nexttile([1,2])
 plot(f,power)
 title('MATLAB FFT:')
 xlabel('Frequency')
 ylabel('Power')
 
-nexttile
+nexttile([1,2])
 plot(f,my_pwr)
 title('Drew FFT:')
 xlabel('Frequency')
 ylabel('Power')
+
+nexttile
+plot(f,mag)
+title('MATLAB FFT:')
+xlabel('Frequency')
+ylabel('Magnitude')
+
+nexttile
+plot(f,phase)
+title('MATLAB FFT:')
+xlabel('Frequency')
+ylabel('Phase')
+
+nexttile
+plot(f,my_mag)
+title('Drew FFT:')
+xlabel('Frequency')
+ylabel('Magnitude')
+
+nexttile
+plot(f,my_phase)
+title('Drew FFT:')
+xlabel('Frequency')
+ylabel('Phase')
 
