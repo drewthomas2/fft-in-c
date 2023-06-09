@@ -24,8 +24,8 @@ my_mag=importdata('fft_mag.csv',',')
 %my_mag = abs(my_fft)
 %my_pwr = abs(my_fft).^2/n
 
-phase_diff=my_phase-phase
-mag_diff=my_mag - mag
+%phase_diff=my_phase-phase
+%mag_diff=my_mag - mag
 
 tiledlayout(2,4)
 

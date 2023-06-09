@@ -25,7 +25,7 @@ int log_2(int N){    // calculate the log base 2 of int numbers
     return i - 1;
 }
 
-int check(int n){ //checking if the number of element is a power of 2
+int check(int n){ // checking if the number of element is a power of 2
     return n > 0 && (n & (n - 1)) == 0;
 }
 
@@ -40,7 +40,7 @@ int reverse(int N, int n){ //calculating reverse number
 }
 
 void ordina(float complex * f1, int N){ //using the reverse order in the array
-    float complex f2[200];
+    float complex f2[512];
     for(int i = 0; i < N; i++){
         f2[i] = f1[reverse(N, i)];
     }
@@ -80,7 +80,7 @@ void transform(float complex * f, int N){
 void FFT(float complex * f, int N, float d){
     transform(f, N);
     for(int i = 0; i < N; i++){
-        f[i] *= d; //multiplying by step
+        f[i] *= d; // multiplying by step
     }   
 }
 
